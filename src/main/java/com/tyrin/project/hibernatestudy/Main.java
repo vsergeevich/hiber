@@ -5,11 +5,14 @@
  */
 package com.tyrin.project.hibernatestudy;
 
+import com.tyrin.project.hibernatestudy.bean.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.postgresql.ds.PGPoolingDataSource;
 
 /**
@@ -24,10 +27,14 @@ public class Main {
         
         SessionFactory sessionFactory = HibernateUtils.getSessionfactory();
         System.out.println("SUCCESS");
-//        sessionFactory.
-            
-                
-                
+        Session session = sessionFactory.openSession();
+        Transaction tr = session.beginTransaction();
+        tr.begin();
+        Book book = new Book();
+        book.setName("Shekspir");
+        session.save(book);
+        tr.commit();
+        session.close();
                 
     }
 
