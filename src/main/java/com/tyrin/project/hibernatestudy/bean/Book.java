@@ -8,10 +8,12 @@ package com.tyrin.project.hibernatestudy.bean;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.hibernate.annotations.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -23,13 +25,24 @@ public class Book {
     public Book() {
     }
     
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     
     @Column
     String name;
+    
+    @ManyToOne
+    @JoinColumn(name="writer_id", foreignKey = @ForeignKey(name="WRITER_ID_FK"))
+    Writer writer;
+
+    public Writer getWriter() {
+        return writer;
+    }
+
+    public void setWriter(Writer writer) {
+        this.writer = writer;
+    }
 
     @Override
     public int hashCode() {
@@ -70,5 +83,13 @@ public class Book {
     public void setName(String name) {
         this.name = name;
     }
+    
+
+    @Override
+    public String toString() {
+        return "Book{" + "id=" + id + ", name=" + name + '}';
+    }
+
+    
     
 }

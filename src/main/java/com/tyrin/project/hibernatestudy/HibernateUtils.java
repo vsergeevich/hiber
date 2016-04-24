@@ -5,6 +5,7 @@
  */
 package com.tyrin.project.hibernatestudy;
 import com.tyrin.project.hibernatestudy.bean.Book;
+import com.tyrin.project.hibernatestudy.bean.Writer;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -17,6 +18,8 @@ public class HibernateUtils {
 	static {
 		Configuration cfg = new Configuration().configure();
                 cfg.addAnnotatedClass(Book.class);
+                cfg.addAnnotatedClass(Writer.class);
+
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                         .applySettings(cfg.getProperties());
 		StandardServiceRegistry sr = builder.build();
