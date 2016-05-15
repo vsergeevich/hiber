@@ -32,7 +32,7 @@ public class Writer {
     public Writer() {
     }
     
-    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = false)
     List<Book> book = new ArrayList<>();
 
     public List<Book> getBook() {

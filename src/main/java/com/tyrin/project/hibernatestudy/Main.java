@@ -25,7 +25,8 @@ import org.postgresql.ds.PGPoolingDataSource;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-//        stdConntection();
+        stdConntection();
+//        if(1==1) return;
 
         SessionFactory sessionFactory = HibernateUtils.getSessionfactory();
         try (Session session = sessionFactory.openSession()) {
@@ -33,28 +34,14 @@ public class Main {
             tr.begin();
 //        createCascade(session);
             Query q = session.createQuery("from Writer where id=:id");
-            q.setParameter("id", 35);
+            q.setParameter("id", 1);
             Writer w = (Writer) q.uniqueResult();
 
             List<Book> list = w.getBook();
             pr(list);
             list.remove(1);
-//            list = null;
-            
-            
-            
-//            w.setBook(null);
-//        
-//        Query q = session.createQuery("from Writer");
-//            q.setParameter("id", 28);
-//            Book b = (Book) q.uniqueResult();
-//            b.setWriter(null);
+            pr(list);
 
-//        
-//            Writer w = (Writer) q.uniqueResult();
-//            session.delete(w);
-//        pr(w);
-//                session.delete(w);
             tr.commit();
         } catch (Exception e) {
             System.err.println("ERROR: ");
@@ -88,7 +75,7 @@ public class Main {
         session.save(book);
 
         tr.commit();
-        session.close();
+//        session.close();
 
     }
 
@@ -97,11 +84,11 @@ public class Main {
         PGPoolingDataSource ds = new PGPoolingDataSource();
         ds.setServerName("localhost");
         ds.setDatabaseName("hiber");
-        ds.setUser("tyrin");
+        ds.setUser("hiber");
         ds.setPassword("123456");
         Connection conn = ds.getConnection();
-        PreparedStatement st = conn.prepareStatement("SELECT * FROM test");
-        st.setInt(1, 222);
+        PreparedStatement st = conn.prepareStatement("SELECT * FROM a");
+//        st.setInt(1, 222);
         ResultSet rs = st.executeQuery();
         while (rs.next()) {
             System.out.println(rs.getInt(1));
